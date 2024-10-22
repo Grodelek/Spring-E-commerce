@@ -1,3 +1,11 @@
 body{
     background: url("background.png");
 }
+.card-body{
+    height: 250px;
+    width: 250px;
+}
+.card-wrapper{
+    max-width: 250px;
+    margin: 0 auto;
+}
