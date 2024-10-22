@@ -2,7 +2,6 @@ package org.project.ecommerce.service;
 
 import org.project.ecommerce.models.Product;
 import org.project.ecommerce.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,8 +22,8 @@ public class ProductService{
     public Optional<Product> getProductById(Long id){
         return productRepository.findById(id);
     }
-    public Product saveProduct(Product product){
-        return productRepository.save(product);
+    public void saveProduct(Product product){
+        productRepository.save(product);
     }
     public void deleteProduct(Long id){
         productRepository.deleteById(id);

@@ -4,12 +4,10 @@ import org.project.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -33,6 +31,17 @@ public class ProductController {
         return "products";
     }
 
+    @GetMapping("/products/{id}")
+    public String getProductById(@PathVariable Long id, Model model){
+        Optional<Product> product = productService.getProductById(id);
+        if(product.isPresent()){
+            model.addAttribute("product", product.get());
+            return "productInfo";
+        }else{
+            return "homepage";
+        }
+    }
+
     @GetMapping("/add")
     public String addProduct(Model model){
         model.addAttribute("product", new Product());
@@ -44,6 +53,7 @@ public class ProductController {
             productService.saveProduct(product);
             return "redirect:/products";
     }
+
 
 
 }

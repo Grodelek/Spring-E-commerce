@@ -9,3 +9,30 @@ body{
     max-width: 250px;
     margin: 0 auto;
 }
+.card {
+    padding: 20px;
+    border-radius: 15px;
+}
+.card-body-info {
+    padding: 30px;
+    font-size: 18px;
+}
+.card-title {
+    font-size: 26px;
+    font-weight: bold;
+}
+.card-subtitle {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.btn-primary {
+    font-size: 16px;
+    padding: 10px 20px;
+}
+.container {
+    max-width: 800px;
+}
+.card-size-info{
+    height: 400px;
+    width: 600px;
+}
