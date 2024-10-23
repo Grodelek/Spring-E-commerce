@@ -48,6 +48,17 @@ public class ProductController {
         return "addProduct";
     }
 
+    @GetMapping("/products/delete/{id}")
+    public String deleteProduct(@PathVariable Long id, Model model){
+        Optional<Product> product = productService.getProductById(id);
+        if (product.isPresent()) {
+            productService.deleteProduct(id);
+            return "redirect:/products";
+        }else{
+            return "productInfo";
+        }
+    }
+
     @PostMapping("/add")
     public String submitProduct(@ModelAttribute ("product") Product product){
             productService.saveProduct(product);

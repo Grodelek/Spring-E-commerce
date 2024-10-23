@@ -33,6 +33,10 @@
             <strong>Description:<br></strong> <span th:text="${product.description}">Product Description</span>
           </p>
           <a th:href="@{/}" class="btn btn-primary">Home</a>
+          <a th:href="@{/products/delete/{id}(id=${product.id})}" class="btn btn-danger"
+             onclick="return confirm('Are you sure you want to delete?');">Delete</a>
+          <a th:href="@{/}" class="btn btn-primary">Update</a>
+
         </div>
       </div>
     </div>
