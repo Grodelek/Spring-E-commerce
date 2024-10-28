@@ -19,12 +19,11 @@
 </nav>
 <body>
 <h1 class="text-center">Product Details</h1>
-
 <div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-lg-6 col-md-8">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body text-center">
+      <div class="card-info mb-4 shadow-sm">
+        <div class="card-body-info text-center">
           <h5 class="card-title" th:text="${product.name}">Product Name</h5>
           <h6 class="card-subtitle mb-2 text-muted" th:text="${product.category}">Category</h6>
           <p class="card-text">
@@ -35,7 +34,7 @@
           <a th:href="@{/}" class="btn btn-primary">Home</a>
           <a th:href="@{/products/delete/{id}(id=${product.id})}" class="btn btn-danger"
              onclick="return confirm('Are you sure you want to delete?');">Delete</a>
-          <a th:href="@{/}" class="btn btn-primary">Update</a>
+          <a th:href="@{/products/update/{id}(id=${product.id})}" class="btn btn-primary">Update</a>
 
         </div>
       </div>

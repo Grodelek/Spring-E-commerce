@@ -59,6 +59,24 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/products/update/{id}")
+    public String updateProduct(@PathVariable Long id, Model model){
+        Optional<Product> product = productService.getProductById(id);
+        if(product.isPresent()){
+            model.addAttribute("product", product.get());
+            return "updateProduct";
+        }else{
+            return "productInfo";
+        }
+    }
+
+    @PostMapping("/products/update/{id}")
+    public String submitUpdate(@PathVariable Long id, @ModelAttribute ("product") Product product) {
+        productService.saveProduct(product);
+        return "redirect:/products";
+    }
+
+
     @PostMapping("/add")
     public String submitProduct(@ModelAttribute ("product") Product product){
             productService.saveProduct(product);

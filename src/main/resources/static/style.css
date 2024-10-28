@@ -1,17 +1,20 @@
 body{
-    background: url("background.png");
-}
+    background: url("background.png")}
 .card-body{
     height: 250px;
-    width: 250px;
+    width: 300px;
 }
 .card-wrapper{
-    max-width: 250px;
+    max-width: 300px;
     margin: 0 auto;
 }
-.card {
+.card-info{
+    background-color: rgba(246, 244, 239, 0.79);
     padding: 20px;
     border-radius: 15px;
+}
+.card-body-info{
+    width: 450px;
 }
 .card-body-info {
     padding: 30px;
