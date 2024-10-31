@@ -1,22 +1,29 @@
+html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 body{
-    background: url("background.png")}
+    background: url("background.png") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0;
+    height: 100vh;
+    margin: 0;
+}
 .card-body{
     height: 250px;
     width: 300px;
 }
 .card-wrapper{
-    max-width: 300px;
+    max-width: 30vh;
     margin: 0 auto;
 }
 .card-info{
     background-color: rgba(246, 244, 239, 0.79);
     padding: 20px;
     border-radius: 15px;
+    height: 400px;
+    width: 500px;
 }
 .card-body-info{
-    width: 450px;
-}
-.card-body-info {
     padding: 30px;
     font-size: 18px;
 }
@@ -36,15 +43,15 @@ body{
     max-width: 800px;
 }
 .card-size-info{
-    height: 400px;
-    width: 600px;
+    height: 40vh;
+    width: 60vh;
+    overflow: scroll;
 }
 .welcome-text {
     font-size: 1.2em;
     line-height: 1.6;
     color: #333333;
     text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .welcome-text strong {
@@ -56,3 +63,24 @@ body{
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.left-filter {
+    background-color: rgba(227, 219, 213, 0.72);
+    width: 30%;
+    height: 100vh;
+}
+
+.container2 {
+    width: 30%;
+    height: 0;
+    flex: 1;
+}
+
+.filter-text{
+    font-size: 20px;
+}
+.filter-text:hover{
+    font-size: 22px;
+}
+
+
