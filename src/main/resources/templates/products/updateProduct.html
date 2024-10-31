@@ -6,40 +6,25 @@
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand text-success" href="/">E-leaf</a>
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link text-dark" href="#">Home</a>
-    </li>
-    <li class="nav-item active">
-      <a class="nav-link text-dark" href="#">Link</a>
-    </li>
-  </ul>
-</nav>
-
+<div th:insert="~{homepage :: nav}"></div>
 <body>
-<h1 class="text-center">Add product</h1>
-
+<h1 class="text-center">Update product</h1>
 <div class="d-flex justify-content-center mt-4">
   <div class="card p-4 shadow" style="width: 50%; background-color: #f8f9fa;">
-    <form action="#" th:action="@{/add}" th:object="${product}" method="post">
+    <form action="#" th:action="@{/products/update/{id}(id=${product.id})}" th:object="${product}" method="post">
       <input type="hidden" th:field="*{id}">
-
       <div class="row mb-3 justify-content-center">
         <div class="col-md-6">
           <label for="name" class="form-label">Name</label>
           <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter product name">
         </div>
       </div>
-
       <div class="row mb-3 justify-content-center">
         <div class="col-md-6">
           <label for="price" class="form-label">Price</label>
           <input type="number" class="form-control" id="price" th:field="*{price}" placeholder="Enter product price">
         </div>
       </div>
-
       <div class="row mb-3 justify-content-center">
         <div class="col-md-6">
           <label for="category" class="form-label">Category</label>
@@ -54,25 +39,21 @@
           </select>
         </div>
       </div>
-
       <div class="row mb-3 justify-content-center">
         <div class="col-md-6">
           <label for="quantityInStock" class="form-label">Quantity in stock</label>
           <input type="number" class="form-control" id="quantityInStock" th:field="*{quantityInStock}" placeholder="Enter quantity in stock">
         </div>
       </div>
-
       <div class="row mb-3">
         <div class="col-md-12">
           <label for="description" class="form-label">Description</label>
           <textarea class="form-control" id="description" th:field="*{description}" placeholder="Enter product description" rows="4"></textarea>
         </div>
       </div>
-
       <button type="submit" class="btn btn-primary w-100">Submit</button>
     </form>
   </div>
 </div>
-
 </body>
 </html>

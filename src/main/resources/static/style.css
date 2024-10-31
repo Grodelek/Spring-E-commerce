@@ -39,3 +39,20 @@ body{
     height: 400px;
     width: 600px;
 }
+.welcome-text {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #333333;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.welcome-text strong {
+    color: #1e90ff;
+    font-weight: 600;
+}
+.welcome-h1{
+    color: #333333;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
