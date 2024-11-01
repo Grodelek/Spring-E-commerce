@@ -19,11 +19,21 @@ public class ProductController {
     this.productService = productService;
     }
 
-    @GetMapping("")
+    @GetMapping()
     public String getProducts(Model model){
         List<Product> allProducts = productService.getAllProducts();
         model.addAttribute("products", allProducts);
         return "products/allProducts";
+    }
+
+    @GetMapping("/filtered")
+    public String getProductsFilter(Model model, @RequestParam String category){
+        List<Product> filteredProducts = productService.getProductsFiltered(category);
+        model.addAttribute("products", filteredProducts);
+        if(category.equals("all")){
+            return "redirect:/products";
+        }
+        return "products/onlyFiltered";
     }
 
     @GetMapping("/{id}")
@@ -76,4 +86,6 @@ public class ProductController {
             productService.saveProduct(product);
             return "redirect:/products";
     }
+
+
 }
