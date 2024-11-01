@@ -25,7 +25,6 @@ public class ProductService{
         return productRepository.findById(id);
     }
 
-
     public List<Product> getProductsFiltered(@Param ("category") String category, @Param ("price") String price){
         if (price.equals("low")) {
             return productRepository.getProductsFiltered(category,Sort.by(Sort.Direction.ASC, "price"));
