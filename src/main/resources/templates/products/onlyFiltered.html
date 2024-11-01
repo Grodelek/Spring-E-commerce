@@ -11,7 +11,29 @@
 <div class="container2">
     <div class="left-filter p-3">
         <h5 class="text-center filter-text">Filter items</h5>
-        <div th:insert="~{products/allProducts :: filter-form}"></div>
+        <form th:action="@{/products/filtered}" method="get" id="filterForm">
+            <div class="form-group">
+                <label for="filterCategory">Select Category:</label>
+                <select class="form-control" id="filterCategory" name="category">
+                    <option value="all" th:selected="${category == 'all'}">All Categories</option>
+                    <option value="Monitors" th:selected="${category == 'Monitors'}">Monitors</option>
+                    <option value="Laptops" th:selected="${category == 'Laptops'}">Laptops</option>
+                    <option value="Computers" th:selected="${category == 'Computers'}">Computers</option>
+                    <option value="Smartphones" th:selected="${category == 'Smartphones'}">Smartphones</option>
+                    <option value="Software" th:selected="${category == 'Software'}">Software</option>
+                    <option value="Computer Accessories" th:selected="${category == 'Computer Accessories'}">Computer Accessories</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="filterPrice">Sort by Price:</label>
+                <select class="form-control" id="filterPrice" name="price">
+                    <option value="default" th:selected="${price == 'default'}">Default</option>
+                    <option value="low" th:selected="${price == 'low'}">Price Low to High</option>
+                    <option value="high" th:selected="${price == 'high'}">Price High to Low</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+        </form>
     </div>
 </div>
 <div class="text-center mb-4">

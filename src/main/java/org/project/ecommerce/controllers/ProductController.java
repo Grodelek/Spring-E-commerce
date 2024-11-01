@@ -27,10 +27,12 @@ public class ProductController {
     }
 
     @GetMapping("/filtered")
-    public String getProductsFilter(Model model, @RequestParam String category){
-        List<Product> filteredProducts = productService.getProductsFiltered(category);
+    public String getProductsFilter(Model model, @RequestParam String category, @RequestParam String price){
+        List<Product> filteredProducts = productService.getProductsFiltered(category,price);
         model.addAttribute("products", filteredProducts);
-        if(category.equals("all")){
+        model.addAttribute("category", category);
+        model.addAttribute("price", price);
+        if(category.equalsIgnoreCase("all")){
             return "redirect:/products";
         }
         return "products/onlyFiltered";
