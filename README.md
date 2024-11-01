@@ -1,1 +1,2 @@
-<h1>Spring e-commerce project</h1>
+<h1>Spring E-leaf</h1>
+<h2>E-commerce project</h2>
