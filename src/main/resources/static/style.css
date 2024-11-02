@@ -82,5 +82,7 @@ body{
 .filter-text:hover{
     font-size: 22px;
 }
-
+.invalid-login-message{
+    color: rgba(237, 42, 42, 0.91);
+}
 
