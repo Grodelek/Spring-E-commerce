@@ -11,7 +11,7 @@
 <h1 class="text-center">Add product</h1>
 <div class="d-flex justify-content-center mt-4">
   <div class="card p-4 shadow" style="width: 50%; background-color: #f8f9fa;">
-    <form action="#" th:action="@{/add}" th:object="${product}" method="post">
+    <form action="#" th:action="@{/products/add}" th:object="${product}" method="post">
       <input type="hidden" th:field="*{id}">
 
       <div class="row mb-3 justify-content-center">

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -12,6 +13,8 @@
     <form action="#" th:action="@{/logout}" method="POST">
       <input class="btn btn-outline-success" type="submit" value="Logout"/>
     </form>
+    <p>
+    <p>Jesteś zalogowany jako: <span th:text="${username}"></span></p>
   </nav>
 </div>
 <body>
