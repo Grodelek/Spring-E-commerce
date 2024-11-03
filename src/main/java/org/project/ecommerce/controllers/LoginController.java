@@ -9,6 +9,4 @@ public class LoginController {
     public String loginForm(){
         return "/login/login-form";
     }
-
-
 }
