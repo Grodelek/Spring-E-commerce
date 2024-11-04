@@ -23,7 +23,7 @@ public class SecurityConfig {
         UserDetails admin = User.builder()
                 .username("admin")
                 .password("{noop}root")
-                .roles("ADMIN")
+                .roles("ADMIN","CUSTOMER")
                 .build();
         return new InMemoryUserDetailsManager(customer, admin);
     }
