@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<div th:insert="~{homepage :: nav}"></div>
+<body>
+<h1 class="text-center">Manage Product</h1>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card-info mb-4 shadow-sm">
+                <div class="card-body-info text-center">
+                    <h5 class="card-title" th:text="${product.name}">Product Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="${product.category}">Category</h6>
+                    <p class="card-text">
+                        <strong>Price:</strong> <span th:text="${product.price}">Product Price</span><br>
+                        <strong>In stock:</strong> <span th:text="${product.quantityInStock}">Stock Quantity</span><br>
+                        <strong>Description:<br></strong> <span th:text="${product.description}">Product Description</span>
+                    </p>
+                    <a th:href="@{/products}" class="btn btn-primary">Back</a>
+                    <a th:href="@{/products/delete/{id}(id=${product.id})}" class="btn btn-danger"
+                       onclick="return confirm('Are you sure you want to delete?');">Delete</a>
+                    <a th:href="@{/products/update/{id}(id=${product.id})}" class="btn btn-primary">Update</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

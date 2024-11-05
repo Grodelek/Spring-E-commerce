@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
->
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -56,11 +56,19 @@
               <strong>In stock:</strong> <span th:text="${product.quantityInStock}"></span><br>
               <strong>Description:<br></strong> <span th:text="${product.description}"></span>
             </p>
-            <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-primary">View Details</a>
-          </div>
-        </div>
+            <div class="d-inline" sec:authorize="hasRole('ADMIN')">
+              <a th:href="@{/products/manage/{id}(id=${product.id})}" class="btn btn-primary">Manage</a>
+            </div>
+            <div class="d-inline" style="margin: 0 auto;">
+              <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-primary">View Details</a>
+            </div>
+            <div class="d-inline">
+              <a href="#" class="btn btn-success">Add to Basket</a>
+            </div>
       </div>
     </div>
+  </div>
+</div>
   </div>
 </div>
 </body>

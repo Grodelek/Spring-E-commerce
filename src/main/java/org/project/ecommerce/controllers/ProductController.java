@@ -89,5 +89,15 @@ public class ProductController {
             return "redirect:/products";
     }
 
+    @GetMapping("/manage/{id}")
+    public String manage(@PathVariable Long id, Model model){
+        Optional<Product> product = productService.getProductById(id);
+        if(product.isPresent()){
+            model.addAttribute("product", product.get());
+        }else{
+            return "redirect:/products";
+        }
+        return "products/manageProduct";
+    }
 
 }
