@@ -12,15 +12,14 @@ import java.util.Optional;
 public class ProductService{
     private final ProductRepository productRepository;
 
-
     ProductService(ProductRepository productRepository){
         this.productRepository = productRepository;
     }
 
     public List<Product> getAllProducts(){
-
            return productRepository.findAll();
     }
+
     public Optional<Product> getProductById(Long id){
         return productRepository.findById(id);
     }
@@ -35,10 +34,10 @@ public class ProductService{
             return productRepository.getProductsFiltered(category, null);
         }
     }
-
     public void saveProduct(Product product){
         productRepository.save(product);
     }
+
     public void deleteProduct(Long id){
         productRepository.deleteById(id);
     }
