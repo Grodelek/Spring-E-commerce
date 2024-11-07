@@ -9,7 +9,6 @@
 </head>
 <div th:insert="~{homepage :: nav}"></div>
 <body>
-<div class="container2">
 <div class="left-filter p-3">
   <h5 class="text-center filter-text">Filter items</h5>
     <form th:action="@{/products/filtered}" method="get" id="filterForm">
@@ -36,7 +35,7 @@
       <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
     </form>
   </div>
-</div>
+<div class="wrapper">
 <div class="text-center mb-4">
   <h1>Products</h1>
   <div class="d-flex justify-content-center mt-2">
@@ -70,6 +69,7 @@
   </div>
 </div>
   </div>
+</div>
 </div>
 </body>
 </html>

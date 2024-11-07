@@ -1,11 +1,10 @@
 package org.project.ecommerce.service;
-
 import org.project.ecommerce.models.User;
 import org.project.ecommerce.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService{
+public class UserService {
     private final UserRepository userRepository;
 
     UserService(UserRepository userRepository){
@@ -14,5 +13,4 @@ public class UserService{
     public void saveUser(User user){
         userRepository.save(user);
     }
-
 }

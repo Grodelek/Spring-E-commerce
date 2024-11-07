@@ -1,3 +1,8 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 html{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -5,8 +10,6 @@ body{
     background: url("background.png") no-repeat center center fixed;
     background-size: cover;
     padding: 0;
-    height: 100vh;
-    margin: 0;
 }
 .card-body{
     height: 250px;
@@ -40,7 +43,10 @@ body{
     padding: 10px 20px;
 }
 .container {
-    max-width: 800px;
+    min-height: 100vh; /* Ustala minimalną wysokość na 100% okna przeglądarki */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Wyrównuje zawartość do góry */
 }
 .card-size-info{
     height: 40vh;
@@ -66,16 +72,17 @@ body{
 
 .left-filter {
     background-color: rgba(227, 219, 213, 0.72);
-    width: 30%;
-    height: 150vh;
+    width: 15%;
+    height: 200%;
 }
-
-.container2 {
-    width: 30%;
-    height: 0;
-    flex: 1;
+.wrapper {
+        width: 50%;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 5%;
 }
-
 .filter-text{
     font-size: 20px;
 }
