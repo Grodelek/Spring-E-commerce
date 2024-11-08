@@ -12,24 +12,17 @@
     <div class="row justify-content-center mt-4">
         <div class="col-md-6">
             <div class="card p-4 shadow">
-                <form action="#" th:action="@{/register}" th:object="${user}" method="post">
+                <form action="#" th:action="@{/register}" th:object="${registrationForm}" method="post">
 
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" th:field="*{login}" placeholder="Enter Username" required>
-                        <div th:if="${#fields.hasErrors('login')}" class="invalid-feedback">
-                        <p th:errors="*{login}"></p>
-                        </div>
+                        <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Enter Username" required>
                     </div>
-                            //Poprawic bo sie nie wyswietla informacja o blednych danych
+
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Enter Password" required>
-                        <div th:if="${#fields.hasErrors('password')}" class="invalid-feedback">
-                         <p th:errors="*{password}"></p>
-                        </div>
                     </div>
-
                     <button type="submit" class="btn btn-primary w-100">Register</button>
                 </form>
             </div>
