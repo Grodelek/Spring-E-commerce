@@ -7,6 +7,6 @@ public class LoginController{
 
     @GetMapping("/login")
     public String loginForm(){
-        return "/login/login-form";
+        return "user/login";
     }
 }

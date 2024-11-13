@@ -13,10 +13,13 @@ body{
 }
 .card-body{
     height: 250px;
-    width: 300px;
+    width: 600px;
+    /*display: flex;*/
+    justify-content: flex-end;
+    align-items: center;
+    text-align: right;
 }
 .card-wrapper{
-    max-width: 30vh;
     margin: 0 auto;
 }
 .card-info{
