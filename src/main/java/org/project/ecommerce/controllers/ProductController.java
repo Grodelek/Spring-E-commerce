@@ -2,10 +2,10 @@ package org.project.ecommerce.controllers;
 import org.project.ecommerce.models.Product;
 import org.project.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -20,21 +20,37 @@ public class ProductController {
     }
 
     @GetMapping()
-    public String getProducts(Model model){
-        List<Product> allProducts = productService.getAllProducts();
-        model.addAttribute("products", allProducts);
+    public String getProducts(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "4") Integer size,
+            @RequestParam(defaultValue = "ASC") String direction,
+            @RequestParam(defaultValue = "name") String orderBy,
+                              Model model){
+        Page<Product> productsPage = productService.getFilteredProducts(page, size, direction, orderBy);
+        model.addAttribute("productsPage", productsPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productsPage.getTotalPages());
+        model.addAttribute("totalItems", productsPage.getTotalElements());
         return "products/allProducts";
     }
 
     @GetMapping("/filtered")
-    public String getProductsFilter(Model model, @RequestParam String category, @RequestParam String price){
-        List<Product> filteredProducts = productService.getProductsFiltered(category,price);
-        model.addAttribute("products", filteredProducts);
+    public String getProductsFilter(
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String price,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "4") Integer size,
+            @RequestParam(defaultValue = "ASC") String direction,
+            @RequestParam(defaultValue = "name") String orderBy,
+            Model model){
+        Page<Product> productsPage = productService.getProductsByFilterPaginated(category,price,page,size,direction,orderBy);
+        model.addAttribute("productsPage", productsPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productsPage.getTotalPages());
+        model.addAttribute("totalItems", productsPage.getTotalElements());
         model.addAttribute("category", category);
         model.addAttribute("price", price);
-        if(category.equalsIgnoreCase("all")){
-            return "redirect:/products";
-        }
+
         return "products/onlyFiltered";
     }
 

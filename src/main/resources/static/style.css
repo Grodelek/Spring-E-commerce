@@ -46,10 +46,10 @@ body{
     padding: 10px 20px;
 }
 .container {
-    min-height: 100vh; /* Ustala minimalną wysokość na 100% okna przeglądarki */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Wyrównuje zawartość do góry */
+    justify-content: flex-start;
 }
 .card-size-info{
     height: 40vh;
@@ -76,7 +76,7 @@ body{
 .left-filter {
     background-color: rgba(227, 219, 213, 0.72);
     width: 15%;
-    height: 200%;
+    height: 150%;
 }
 .wrapper {
         width: 50%;
