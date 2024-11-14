@@ -12,9 +12,8 @@ body{
     padding: 0;
 }
 .card-body{
-    height: 250px;
-    width: 600px;
-    /*display: flex;*/
+    height: 300px;
+    width: 100%;
     justify-content: flex-end;
     align-items: center;
     text-align: right;
@@ -36,6 +35,7 @@ body{
 .card-title {
     font-size: 26px;
     font-weight: bold;
+    margin-top: 40px;
 }
 .card-subtitle {
     font-size: 20px;
