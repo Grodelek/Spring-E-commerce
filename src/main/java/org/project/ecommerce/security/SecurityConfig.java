@@ -30,6 +30,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(configurer ->
                 configurer
                         .requestMatchers("/products/manage/**").hasRole("ADMIN")
+                        .requestMatchers("/products/add", "products/delete/1", "products/update/").hasRole("ADMIN")
                         .requestMatchers("/register").permitAll()
                         .anyRequest().authenticated()
         )

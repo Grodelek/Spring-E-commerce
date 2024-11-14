@@ -38,8 +38,10 @@
 <div class="wrapper">
 <div class="text-center mb-4">
   <h1>Products</h1>
-  <div class="d-flex justify-content-center mt-2">
+  <div sec:authorize="hasRole('ADMIN')">
+    <div class="d-flex justify-content-center mt-2">
     <a class="btn btn-primary" th:href="@{products/add}">Add Product</a>
+  </div>
   </div>
 </div>
 <div class="container mt-4">
