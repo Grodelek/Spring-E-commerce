@@ -1,6 +1,6 @@
 package org.project.ecommerce.controllers;
 
-import org.project.ecommerce.models.RegistrationForm;
+import org.project.ecommerce.models.User;
 import org.project.ecommerce.service.RegistrationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +19,13 @@ public class RegistrationController {
     }
     @GetMapping
     public String getRegistrationForm(Model model){
-        model.addAttribute("registrationForm", new RegistrationForm());
+        model.addAttribute("registrationForm", new User());
         return "user/register";
     }
 
     @PostMapping
-    public String registerUser(@ModelAttribute("registrationForm") RegistrationForm form){
-        registrationService.registerUser(form.getUsername(), form.getPassword(), "ROLE_CUSTOMER");
+    public String registerUser(@ModelAttribute("registrationForm") User userForm){
+        registrationService.registerUser(userForm.getUsername(), userForm.getPassword(), "ROLE_CUSTOMER");
         return "redirect:/login";
     }
 
