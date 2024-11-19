@@ -95,4 +95,10 @@ body{
 .invalid-login-message{
     color: rgba(237, 42, 42, 0.91);
 }
-
+.cart-wrapper{
+    width: 400px;
+    height: auto;
+    border-radius: 5px;
+    margin: 0 auto;
+    background-color: rgba(255, 252, 250, 0.48);
+}

@@ -1,5 +1,6 @@
 package org.project.ecommerce.service;
 
+import jakarta.transaction.Transactional;
 import org.project.ecommerce.models.User;
 import org.project.ecommerce.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class UserService{
         return userRepository.findById(id);
     }
 
+    @Transactional
     public void save(User user){
         userRepository.save(user);
     }

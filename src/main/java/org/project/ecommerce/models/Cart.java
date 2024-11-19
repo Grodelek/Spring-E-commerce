@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @Setter
@@ -15,10 +18,12 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name="users_id", unique = true)
     private User user;
 
+    @OneToMany(mappedBy = "cart")
+    private List<CartItem> cartItems = new ArrayList<>();
 
 
 }

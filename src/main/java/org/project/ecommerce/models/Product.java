@@ -3,6 +3,9 @@ package org.project.ecommerce.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Entity
 @Table(name="product")
@@ -22,6 +25,9 @@ public class Product {
     @Column(name="quantityInStock")
     private int quantityInStock;
 
+    @OneToMany(mappedBy = "product")
+    private List<CartItem> cartItems = new ArrayList<>();
+
     public Product(String name, double price, String description, String category, int quantityInStock) {
         this.name = name;
         this.price = price;
@@ -32,4 +38,5 @@ public class Product {
 
     public Product() {
     }
+
 }

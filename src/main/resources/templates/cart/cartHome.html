@@ -27,11 +27,22 @@
 </div>
 
 <h1 class="welcome-h1">Your Cart</h1>
-<p class="welcome-text">
-    User username: <span th:text="${user.username}"></span><br>
-    User's Cart id: <span th:text="${cart.id}"></span>
+<div class="cart-wrapper">
+    <div th:each="cartItem : ${products}">
+    <h5 class="card-title" th:text="${cartItem.product.name}">Product Name</h5>
+    <h6 class="card-subtitle mb-2 text-muted" th:text="${cartItem.product.category}">Category</h6>
+    <p class="card-text">
+        <strong>Price:</strong> <span th:text="${cartItem.product.price}"></span><br>
+        <strong>In stock:</strong> <span th:text="${cartItem.product.quantityInStock}"></span><br>
+        <strong>Description:<br></strong> <span th:text="${cartItem.product.description}"></span>
+    </p>
+    <div class="d-inline" style="margin: 0 auto;">
+        <a th:href="@{/products/{id}(id=${cartItem.product.id})}" class="btn btn-primary">View Details</a>
+    </div>
+        <p>CartItem ID: <span th:text="${cartItem.id}"></span></p>
+    </div>
+</div>
 
-</p>
 
 <div class="d-flex justify-content-center">
     <a class="btn btn-primary" th:href="@{/products}">Products</a>

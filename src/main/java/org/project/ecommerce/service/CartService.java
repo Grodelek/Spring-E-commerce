@@ -1,5 +1,6 @@
 package org.project.ecommerce.service;
 
+import jakarta.transaction.Transactional;
 import org.project.ecommerce.models.Cart;
 import org.project.ecommerce.models.User;
 import org.project.ecommerce.repository.CartRepository;
@@ -13,7 +14,8 @@ public class CartService {
         this.cartRepository = cartRepository;
     }
 
-    public Cart createCartForUser(User user){
+  @Transactional
+  public Cart createCartForUser(User user){
       Cart cart = new Cart();
       cart.setUser(user);
       return cartRepository.save(cart);
