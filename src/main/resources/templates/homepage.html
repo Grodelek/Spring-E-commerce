@@ -17,6 +17,9 @@
             <span class="me-3 text-dark">
                 Logged in as <strong><span class="m-1" sec:authentication="principal.username"></span></strong>
             </span>
+        <div>
+          <a  class="btn btn-outline-primary m-1" th:href="@{/cart}">Cart</a>
+        </div>
         <form action="#" th:action="@{/logout}" method="POST">
           <input class="btn btn-outline-success" type="submit" value="Logout" />
         </form>
