@@ -2,10 +2,10 @@ package org.project.ecommerce.controllers;
 
 import jakarta.transaction.Transactional;
 import org.project.ecommerce.models.Cart;
-import org.project.ecommerce.models.CartItem;
+import org.project.ecommerce.models.CartProducts;
 import org.project.ecommerce.models.Product;
 import org.project.ecommerce.models.User;
-import org.project.ecommerce.service.CartItemService;
+import org.project.ecommerce.service.CartProductsService;
 import org.project.ecommerce.service.CartService;
 import org.project.ecommerce.service.ProductService;
 import org.project.ecommerce.service.UserService;
@@ -23,14 +23,14 @@ import java.util.Optional;
 public class CartController {
     private final CartService cartService;
     private final UserService userService;
-    private final CartItemService cartItemService;
+    private final CartProductsService cartProductsService;
     private final ProductService productService;
 
     @Autowired
-    public CartController(CartService cartService, UserService userService, CartItemService cartItemService, ProductService productService) {
+    public CartController(CartService cartService, UserService userService, CartProductsService cartProductsService, ProductService productService) {
         this.cartService = cartService;
         this.userService = userService;
-        this.cartItemService = cartItemService;
+        this.cartProductsService = cartProductsService;
         this.productService = productService;
     }
 
@@ -61,12 +61,12 @@ public class CartController {
             loggedInUser.setCart(cart);
             userService.save(loggedInUser);
         }
-        CartItem cartItem = new CartItem();
-        cartItem.setProduct(foundProduct);
-        cartItem.setCart(cart);
-        cartItem.setQuantity(1);
-        cartItemService.save(cartItem);
-        List<CartItem> cartItemList = cartItemService.getCartItemsByCart(cart);
+        CartProducts cartProduct = new CartProducts();
+        cartProduct.setProduct(foundProduct);
+        cartProduct.setCart(cart);
+        cartProduct.setQuantity(1);
+        cartProductsService.save(cartProduct);
+        List<CartProducts> cartItemList = cartProductsService.getCartItemsByCart(cart);
         model.addAttribute("products", cartItemList);
         return "cart/cartHome";
     }

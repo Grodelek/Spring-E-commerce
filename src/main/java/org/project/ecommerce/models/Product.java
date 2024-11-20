@@ -26,7 +26,7 @@ public class Product {
     private int quantityInStock;
 
     @OneToMany(mappedBy = "product")
-    private List<CartItem> cartItems = new ArrayList<>();
+    private List<CartProducts> cartItems = new ArrayList<>();
 
     public Product(String name, double price, String description, String category, int quantityInStock) {
         this.name = name;

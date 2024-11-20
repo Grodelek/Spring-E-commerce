@@ -1,6 +1,5 @@
 package org.project.ecommerce.controllers;
 import org.project.ecommerce.models.Product;
-import org.project.ecommerce.service.CartItemService;
 import org.project.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
