@@ -23,4 +23,5 @@ public class CartProductsService {
     public List<CartProducts> getCartItemsByCart(Cart cart) {
         return cartProductsRepository.findByCart(cart);
     }
+
 }

@@ -2,8 +2,12 @@ package org.project.ecommerce.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+@Setter
+@Getter
 @Entity
 @Table(name = "cart_products")
 public class CartProducts {
@@ -21,6 +25,4 @@ public class CartProducts {
 
     @Column(name = "quantity")
     private int quantity;
-
-
 }

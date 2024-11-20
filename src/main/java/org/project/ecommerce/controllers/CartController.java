@@ -43,13 +43,14 @@ public class CartController {
             userService.save(loggedInUser);
         }
         model.addAttribute("user", loggedInUser);
-        model.addAttribute("cart", loggedInUser.getCart());
+        List<CartProducts> cartItemList = cartProductsService.getCartItemsByCart(cart);
+        model.addAttribute("products", cartItemList);
         return "cart/cartHome";
     }
 
     @Transactional
     @GetMapping("/cart/{id}")
-    public String addToCart(@PathVariable Long id, Model model, @AuthenticationPrincipal User loggedInUser){
+    public String addToCart(@PathVariable Long id, @AuthenticationPrincipal User loggedInUser){
         Optional<Product> product = productService.getProductById(id);
         if(product.isEmpty()){
             return "redirect:/products";
@@ -66,9 +67,7 @@ public class CartController {
         cartProduct.setCart(cart);
         cartProduct.setQuantity(1);
         cartProductsService.save(cartProduct);
-        List<CartProducts> cartItemList = cartProductsService.getCartItemsByCart(cart);
-        model.addAttribute("products", cartItemList);
-        return "cart/cartHome";
+        return "success";
     }
 }
 
