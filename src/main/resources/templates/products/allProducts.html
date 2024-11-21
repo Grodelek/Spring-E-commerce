@@ -46,6 +46,7 @@
 </div>
 <div class="container mt-4">
   <div class="row justify-content-center">
+    <div class="warning-info btn btn-danger" th:if="${message}" th:text="${message}"></div>
     <div class="col-12" th:each="product : ${productsPage.content}">
       <div class="card-wrapper">
         <div class="card mb-4 shadow-sm">

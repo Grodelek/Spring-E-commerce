@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,11 @@ public class CartController {
     private final ProductService productService;
 
     @Autowired
-    public CartController(CartService cartService, UserService userService, CartProductsService cartProductsService, ProductService productService) {
+    public CartController(
+            CartService cartService,
+            UserService userService,
+            CartProductsService cartProductsService,
+            ProductService productService){
         this.cartService = cartService;
         this.userService = userService;
         this.cartProductsService = cartProductsService;
@@ -50,7 +55,10 @@ public class CartController {
 
     @Transactional
     @GetMapping("/cart/{id}")
-    public String addToCart(@PathVariable Long id, @AuthenticationPrincipal User loggedInUser){
+    public String addToCart(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User loggedInUser,
+            RedirectAttributes redirectAttributes){
         Optional<Product> product = productService.getProductById(id);
         if(product.isEmpty()){
             return "redirect:/products";
@@ -65,8 +73,13 @@ public class CartController {
         Optional<CartProducts> cartProduct = cartProductsService.findByProductIdAndCartId(id,cart.getId());
         if(cartProduct.isPresent()){
             CartProducts existingproduct = cartProduct.get();
-            existingproduct.setQuantity(existingproduct.getQuantity()+1);
-            cartProductsService.save(existingproduct);
+            if(foundProduct.getQuantityInStock() > existingproduct.getQuantity()) {
+                existingproduct.setQuantity(existingproduct.getQuantity() + 1);
+                cartProductsService.save(existingproduct);
+            }else{
+                redirectAttributes.addFlashAttribute("message", "Product is not in stock!");
+                return "redirect:/products";
+            }
         }else {
             CartProducts newCartProduct = new CartProducts();
             newCartProduct.setProduct(foundProduct);
@@ -74,7 +87,7 @@ public class CartController {
             newCartProduct.setQuantity(1);
             cartProductsService.save(newCartProduct);
         }
-            return "success";
+            return "redirect:/cart";
 
     }
 }
