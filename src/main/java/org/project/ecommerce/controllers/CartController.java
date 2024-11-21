@@ -62,12 +62,20 @@ public class CartController {
             loggedInUser.setCart(cart);
             userService.save(loggedInUser);
         }
-        CartProducts cartProduct = new CartProducts();
-        cartProduct.setProduct(foundProduct);
-        cartProduct.setCart(cart);
-        cartProduct.setQuantity(1);
-        cartProductsService.save(cartProduct);
-        return "success";
+        Optional<CartProducts> cartProduct = cartProductsService.findByProductIdAndCartId(id,cart.getId());
+        if(cartProduct.isPresent()){
+            CartProducts existingproduct = cartProduct.get();
+            existingproduct.setQuantity(existingproduct.getQuantity()+1);
+            cartProductsService.save(existingproduct);
+        }else {
+            CartProducts newCartProduct = new CartProducts();
+            newCartProduct.setProduct(foundProduct);
+            newCartProduct.setCart(cart);
+            newCartProduct.setQuantity(1);
+            cartProductsService.save(newCartProduct);
+        }
+            return "success";
+
     }
 }
 
