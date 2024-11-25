@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
@@ -25,14 +26,20 @@ public class User implements UserDetails{
         private String password;
         @Column(name = "enabled")
         private int enabled;
-
         @OneToOne(mappedBy = "user")
         private Cart cart;
+        @ElementCollection(fetch = FetchType.EAGER)
+        @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "users_id"))
+        @Column(name = "role")
+        private List<String> roles;
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-                return List.of(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
+                return roles.stream()
+                        .map(role -> new SimpleGrantedAuthority(role))
+                        .collect(Collectors.toList());
         }
+
 
         @Override
         public boolean isAccountNonExpired() {

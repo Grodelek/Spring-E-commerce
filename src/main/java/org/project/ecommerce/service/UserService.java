@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import org.project.ecommerce.models.User;
 import org.project.ecommerce.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -24,4 +23,12 @@ public class UserService{
     public void save(User user){
         userRepository.save(user);
     }
+
+
+    public void saveRoleForUser(User user) {
+         user = userRepository.findByUsername(user.getUsername()).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setRoles(user.getRoles());
+        userRepository.save(user);
+    }
 }
+
