@@ -96,7 +96,7 @@ body{
     color: rgba(237, 42, 42, 0.91);
 }
 .cart-wrapper{
-    width: 700px;
+    width: 40vw;
     height: auto;
     border-radius: 5px;
     margin: 0 auto;
@@ -108,4 +108,9 @@ body{
 }
 .warning-info{
     margin: 5px;
+}
+.summary-cart-bottom{
+    background-color: rgba(255, 252, 250, 0.68);
+    margin: 0 auto;
+    width: 40vw;
 }

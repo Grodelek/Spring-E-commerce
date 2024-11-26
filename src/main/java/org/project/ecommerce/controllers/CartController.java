@@ -50,6 +50,11 @@ public class CartController {
         model.addAttribute("user", loggedInUser);
         List<CartProducts> cartItemList = cartProductsService.getCartItemsByCart(cart);
         model.addAttribute("products", cartItemList);
+        double cartPrice=0;
+        for(CartProducts cartItem :  cartItemList){
+            cartPrice += cartItem.getQuantity() * cartItem.getProduct().getPrice();
+        }
+        model.addAttribute("cartPrice", cartPrice);
         return "cart/cartHome";
     }
 
