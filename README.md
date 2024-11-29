@@ -56,20 +56,20 @@
    mvn clean install
    ```
 3. Run the application:
- ```bash
+   ```bash
    mvn spring-boot:run
-```
+   ```
 4.Access the application in your browser:
    ```bash
    http://localhost:8080
-```
+   ```
 🧱 Project Structure
 
 The project follows the MVC architecture:
 
     Model: Represents application data.
     Location: src/main/java/com/example/ecommerce/model
-    Examples: Product, Order, User.
+    Examples: Product, User.
 
     Controller: Handles HTTP requests and sends data to views.
     Location: src/main/java/com/example/ecommerce/controller
