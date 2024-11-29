@@ -20,5 +20,4 @@ public class CartService {
       cart.setUser(user);
       return cartRepository.save(cart);
     }
-
 }

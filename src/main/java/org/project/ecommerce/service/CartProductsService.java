@@ -16,7 +16,6 @@ public class CartProductsService {
     public CartProductsService(CartProductsRepository cartProductsRepository) {
         this.cartProductsRepository = cartProductsRepository;
     }
-
     public void save(CartProducts cartProducts){
         cartProductsRepository.save(cartProducts);
     }
@@ -29,4 +28,7 @@ public class CartProductsService {
         return cartProductsRepository.findByProductIdAndCartId(productId, cartId);
     }
 
+    public void delete(CartProducts products) {
+        cartProductsRepository.delete(products);
+    }
 }

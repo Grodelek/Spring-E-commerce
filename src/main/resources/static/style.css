@@ -114,3 +114,15 @@ body{
     margin: 0 auto;
     width: 40vw;
 }
+.fa-minus{
+    color: #f63030;
+}
+.fa-minus:hover{
+    color: #b60909;
+}
+.fa-plus{
+    color: #3dca3d;
+}
+.fa-plus:hover{
+    color: #148814;
+}

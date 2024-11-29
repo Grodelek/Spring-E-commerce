@@ -41,21 +41,28 @@ public class CartController {
 
     @GetMapping("/cart")
     public String getCart(Model model, @AuthenticationPrincipal User loggedInUser) {
+        double cartPrice = addCartPrice(loggedInUser);
         Cart cart = loggedInUser.getCart();
         if (cart == null) {
             cart = cartService.createCartForUser(loggedInUser);
             loggedInUser.setCart(cart);
             userService.save(loggedInUser);
         }
-        model.addAttribute("user", loggedInUser);
         List<CartProducts> cartItemList = cartProductsService.getCartItemsByCart(cart);
+        model.addAttribute("user", loggedInUser);
         model.addAttribute("products", cartItemList);
-        double cartPrice=0;
+        model.addAttribute("cartPrice", cartPrice);
+        return "cart/cartHome";
+    }
+
+    public double addCartPrice(@AuthenticationPrincipal User loggedInUser){
+        double cartPrice = 0;
+        Cart cart = loggedInUser.getCart();
+        List<CartProducts> cartItemList = cartProductsService.getCartItemsByCart(cart);
         for(CartProducts cartItem :  cartItemList){
             cartPrice += cartItem.getQuantity() * cartItem.getProduct().getPrice();
         }
-        model.addAttribute("cartPrice", cartPrice);
-        return "cart/cartHome";
+        return cartPrice;
     }
 
     @Transactional
@@ -93,7 +100,50 @@ public class CartController {
             cartProductsService.save(newCartProduct);
         }
             return "redirect:/cart";
-
     }
+
+    @Transactional
+    @GetMapping("/cart/lower/{id}")
+    public String substractQuantity(@PathVariable Long id, @AuthenticationPrincipal User loggedInUser){
+       Cart cart = loggedInUser.getCart();
+        Optional<CartProducts> cartProduct = cartProductsService.findByProductIdAndCartId(id,cart.getId());
+        if(cartProduct.isEmpty()){
+            return "redirect:/cart";
+        }
+        CartProducts products = cartProduct.get();
+        if(products.getQuantity() > 1){
+            products.setQuantity(products.getQuantity() - 1);
+            cartProductsService.save(products);
+            return "redirect:/cart";
+        }
+        if(products.getQuantity() == 1){
+            products.setQuantity(0);
+            cartProductsService.delete(products);
+            return "redirect:/cart";
+        }
+        return "redirect:/products";
+    }
+
+    @Transactional
+    @GetMapping("/cart/add/{id}")
+    public String addQuantity(@PathVariable Long id,
+                              @AuthenticationPrincipal User loggedInUser,
+                              RedirectAttributes redirectAttributes){
+        Cart cart = loggedInUser.getCart();
+        Optional<CartProducts> cartProductOpt = cartProductsService.findByProductIdAndCartId(id,cart.getId());
+        if(cartProductOpt.isEmpty()){
+            return "redirect:/cart";
+        }
+        CartProducts cartProducts = cartProductOpt.get();
+        Product product = cartProducts.getProduct();
+            if (cartProducts.getQuantity() != product.getQuantityInStock()) {
+                cartProducts.setQuantity(cartProducts.getQuantity() + 1);
+                cartProductsService.save(cartProducts);
+                return "redirect:/cart";
+            }else{
+                redirectAttributes.addFlashAttribute("error", "Cannot increase quantity. Stock limit reached or product not in cart.");
+                return "redirect:/cart";
+            }
+        }
 }
 
