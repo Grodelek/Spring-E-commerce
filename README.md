@@ -1,6 +1,5 @@
-Spring E-Commerce
-
-Spring E-Commerce is a web application built using the Spring Framework. It enables product management, a shopping cart feature, and order processing. The project is based on the MVC (Model-View-Controller) architecture, ensuring clean code separation between business logic, data handling, and presentation layers.
+<h1>E-leaf</h1>
+is a web application built using the Spring Framework. It enables product management, a shopping cart feature, and order processing. The project is based on the MVC (Model-View-Controller) architecture, ensuring clean code separation between business logic, data handling, and presentation layers.
 Table of Contents
 
     Features
