@@ -17,7 +17,7 @@
 ## ✨ Features
 
 - **Product Management**:
-  - Add, edit, delete, and view products.
+  - Add, edit, delete,filter,sort and view products.
 - **Shopping Cart**:
   - Add products to the cart, remove them, or update quantities.
 - **Order Processing**:
@@ -31,8 +31,8 @@
 
 - **Backend**: Java 17, Spring Boot, Spring MVC, Spring Data JPA, Hibernate
 - **Frontend**: HTML, CSS, Thymeleaf
-- **Database**: H2 (embedded database) with support for other databases like MySQL and PostgreSQL
-- **Testing**: JUnit, Mockito
+- **Database**: MySQL
+- **Testing**: JUnit
 - **Other Tools**: Maven, Lombok, IntelliJ IDEA
 
 ---
@@ -54,15 +54,12 @@
 2. Build the project using Maven:
    ```bash
    mvn clean install
-   ```
 3. Run the application:
    ```bash
    mvn spring-boot:run
-   ```
-4.Access the application in your browser:
+4. Access the application in your browser:
    ```bash
    http://localhost:8080
-   ```
 🧱 Project Structure
 
 The project follows the MVC architecture:
