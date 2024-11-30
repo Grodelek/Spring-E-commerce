@@ -24,7 +24,8 @@
   - Create and manage orders.
 - **User Authentication**:
   - Register and log in users with different roles (e.g., admin, customer).
-
+- **Admin Panel**:
+  - Manage products on page and change roles of users.
 ---
 
 ## 🛠 Technologies
