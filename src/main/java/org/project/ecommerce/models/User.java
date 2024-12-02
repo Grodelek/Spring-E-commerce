@@ -32,7 +32,6 @@ public class User implements UserDetails{
         @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "users_id"))
         @Column(name = "role")
         private List<String> roles;
-
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
                 return roles.stream()

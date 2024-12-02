@@ -126,3 +126,6 @@ body{
 .fa-plus:hover{
     color: #148814;
 }
+.fa-star:hover{
+    color: goldenrod;
+}

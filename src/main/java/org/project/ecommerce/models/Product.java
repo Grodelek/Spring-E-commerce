@@ -28,6 +28,7 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<CartProducts> cartItems = new ArrayList<>();
 
+
     public Product(String name, double price, String description, String category, int quantityInStock) {
         this.name = name;
         this.price = price;
