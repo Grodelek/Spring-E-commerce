@@ -28,6 +28,10 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<CartProducts> cartItems = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "favoriteProducts")
+    private List<User> favoritedByUsers;
+
+
 
     public Product(String name, double price, String description, String category, int quantityInStock) {
         this.name = name;

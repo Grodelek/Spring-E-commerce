@@ -18,6 +18,12 @@ body{
     align-items: center;
     text-align: right;
 }
+.card-body-favorite{
+    height: 300px;
+    width: 50%;
+    align-items: center;
+    text-align: right;
+}
 .card-wrapper{
     margin: 0 auto;
 }
@@ -128,4 +134,10 @@ body{
 }
 .fa-star:hover{
     color: goldenrod;
+}
+.btn-no-bg {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 }

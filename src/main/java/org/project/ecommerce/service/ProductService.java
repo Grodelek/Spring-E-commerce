@@ -1,20 +1,28 @@
 package org.project.ecommerce.service;
 
+import jakarta.transaction.Transactional;
 import org.project.ecommerce.models.Product;
+import org.project.ecommerce.models.User;
 import org.project.ecommerce.repository.ProductRepository;
+import org.project.ecommerce.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProductService{
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
-    ProductService(ProductRepository productRepository){
+    @Autowired
+    ProductService(ProductRepository productRepository, UserRepository userRepository){
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
     public Optional<Product> getProductById(Long id){
@@ -47,5 +55,19 @@ public class ProductService{
         }
         Pageable pageRequest = PageRequest.of(page, size , sort);
         return productRepository.getProductsFilteredByCategory(category, pageRequest);
+    }
+
+    @Transactional
+    public void addProductToFavorite(Optional<Product> optionalProduct, User user) {
+        if(optionalProduct.isPresent()){
+            List<Product> favoriteProducts = user.getFavoriteProducts();
+            Product product = optionalProduct.get();
+            //dodac ze jesli produkt jest juz w ulubionych u zalogowanego uzytkownika to nie mozna dodac drugi raz
+            favoriteProducts.add(product);
+            user.setFavoriteProducts(favoriteProducts);
+            userRepository.save(user);
+        }else{
+            throw new RuntimeException("Product dont exist");
+        }
     }
 }

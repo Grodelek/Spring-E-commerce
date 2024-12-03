@@ -68,7 +68,13 @@
             <div class="d-inline">
               <a th:href="@{/cart/{id}(id=${product.id})}" class="btn btn-success">Add to Basket</a>
             </div>
-            <i class="fa-regular fa-star"><a th:href="@{/products/favorite/{id}(id=${product.id})}"></a></i>
+            <div class="d-inline">
+             <form th:action="@{/products/favorite/{id}(id=${product.id})}" method="POST">
+                <button type="submit" class="btn-no-bg">
+                  <i class="fa-regular fa-star"></i>
+                </button>
+              </form>
+            </div>
       </div>
     </div>
   </div>
