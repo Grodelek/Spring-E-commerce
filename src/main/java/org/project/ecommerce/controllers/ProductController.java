@@ -2,25 +2,28 @@ package org.project.ecommerce.controllers;
 import org.project.ecommerce.models.Product;
 import org.project.ecommerce.models.User;
 import org.project.ecommerce.service.ProductService;
+import org.project.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
     private final ProductService productService;
+    private final UserService userService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, UserService userService) {
         this.productService = productService;
+        this.userService = userService;
     }
 
     @GetMapping()
@@ -122,20 +125,28 @@ public class ProductController {
 
     @GetMapping("/favorite")
     public String getFavoriteProducts(@AuthenticationPrincipal User loggedInUser, Model model) {
-        List<Product> favoriteProductList = loggedInUser.getFavoriteProducts();
+        Set<Product> favoriteProductList = productService.getFavoriteProducts(loggedInUser);
+
         model.addAttribute("products", favoriteProductList);
         return "products/favorite";
     }
 
     @PostMapping("/favorite/{id}")
-    public String addToFavorite(@PathVariable Long id, @AuthenticationPrincipal User loggedInUser,Model model) {
-        Optional<Product> foundProduct = productService.getProductById(id);
-        if (foundProduct.isPresent()) {
-            productService.addProductToFavorite(foundProduct, loggedInUser);
-        } else {
-            return "redirect:/products";
-        }
-        return "redirect:/products/favorite";
+    public String addToFavorite(@PathVariable Long id, @AuthenticationPrincipal User loggedInUser, RedirectAttributes redirectAttributes) {
+            Optional<Product> foundProduct = productService.getProductById(id);
+           try {
+               if (foundProduct.isPresent()) {
+                       productService.addProductToFavorite(foundProduct.get(), loggedInUser);
+                       redirectAttributes.addFlashAttribute("favorite", "Product added to favorites.");
+                       return "redirect:/products";
+                   }
+           }catch(RuntimeException ex){
+               redirectAttributes.addFlashAttribute("error", "Error product already in favorites.");
+               return "redirect:/products";
+           }
+        return "redirect:/products";
     }
-    }
+}
+
+
 

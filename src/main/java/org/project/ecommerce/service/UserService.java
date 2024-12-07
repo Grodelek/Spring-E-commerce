@@ -30,6 +30,5 @@ public class UserService{
         user.setRoles(user.getRoles());
         userRepository.save(user);
     }
-
 }
 

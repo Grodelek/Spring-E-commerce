@@ -8,9 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -30,6 +28,7 @@ public class User implements UserDetails{
         private int enabled;
         @OneToOne(mappedBy = "user")
         private Cart cart;
+
         @ElementCollection(fetch = FetchType.EAGER)
         @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "users_id"))
         @Column(name = "role")
@@ -38,9 +37,10 @@ public class User implements UserDetails{
         @JoinTable(
                 name="user_favorite_products",
                 joinColumns = @JoinColumn(name="user_id"),
-                inverseJoinColumns = @JoinColumn(name = "product_id"))
+                inverseJoinColumns = @JoinColumn(name = "product_id")
+        )
         @ManyToMany(fetch = FetchType.EAGER)
-        private List<Product> favoriteProducts = new ArrayList<>();
+        private Set<Product> favoriteProducts = new HashSet<>();
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {

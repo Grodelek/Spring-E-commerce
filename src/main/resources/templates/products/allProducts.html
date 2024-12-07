@@ -12,7 +12,7 @@
 <body>
 <div class="left-filter p-3">
   <h5 class="text-center filter-text">Filter items</h5>
-    <form th:action="@{/products/filtered}" method="get" id="filterForm">
+  <form th:action="@{/products/filtered}" method="get" id="filterForm">
       <div class="form-group">
         <label for="filterCategory">Select Category:</label>
         <select class="form-control" id="filterCategory" name="category">
@@ -46,6 +46,8 @@
   </div>
 </div>
 <div class="container mt-4">
+  <p  class="btn btn-danger" th:if="${error}" th:text="${error}"></p>
+  <p class="btn btn-success" th:if="${favorite}" th:text="${favorite}"></p>
   <div class="row justify-content-center">
     <div class="warning-info btn btn-danger" th:if="${message}" th:text="${message}"></div>
     <div class="col-12" th:each="product : ${productsPage.content}">

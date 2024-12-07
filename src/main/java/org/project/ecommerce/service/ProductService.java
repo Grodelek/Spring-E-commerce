@@ -11,8 +11,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProductService{
@@ -58,16 +61,28 @@ public class ProductService{
     }
 
     @Transactional
-    public void addProductToFavorite(Optional<Product> optionalProduct, User user) {
-        if(optionalProduct.isPresent()){
-            List<Product> favoriteProducts = user.getFavoriteProducts();
-            Product product = optionalProduct.get();
-            //dodac ze jesli produkt jest juz w ulubionych u zalogowanego uzytkownika to nie mozna dodac drugi raz
-            favoriteProducts.add(product);
-            user.setFavoriteProducts(favoriteProducts);
+    public void addProductToFavorite(Product product, User user) {
+            user = userRepository.findById(user.getId()).orElse(user);
+        if (!user.getFavoriteProducts().contains(product)) {
+            user.getFavoriteProducts().add(product);
             userRepository.save(user);
-        }else{
-            throw new RuntimeException("Product dont exist");
+        }else if(user.getFavoriteProducts().contains(product)){
+            throw new RuntimeException("Product is already added");
         }
+    }
+
+    public Product getProductByIdOrThrow(Long id) {
+        Optional<Product> productOptional = productRepository.findById(id);
+        if (productOptional.isPresent()) {
+            return productOptional.get();
+        } else {
+            throw new RuntimeException("Product not found");
+        }
+    }
+
+    public Set<Product> getFavoriteProducts(User user) {
+        return userRepository.findById(user.getId())
+                .map(User::getFavoriteProducts)
+                .orElse(Collections.emptySet());
     }
 }
